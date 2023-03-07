@@ -1,36 +1,19 @@
 package content
 
 import (
-	"log"
 	"net"
-	"sync"
+
+	"github.com/DW-inc/Ludo_Server/utils"
 )
 
 type PacketHandler struct {
-	HandlerFunc map[int]func(net.Conn, string)
+	HandlerFunc map[string]func(net.Conn, string)
 }
-
-var PH_Ins *PacketHandler
-var PH_once sync.Once
-
-func GetPacketHandler() *PacketHandler {
-	PH_once.Do(func() {
-		PH_Ins = &PacketHandler{}
-	})
-	return PH_Ins
-}
-
-const (
-	Err = iota
-
-	ESignIn = 1
-	EMessage
-)
 
 func (ph *PacketHandler) Init() {
-	log.Println("INIT_PacketHandler")
+	utils.Print("INIT_PacketHandler")
 
-	ph.HandlerFunc = make(map[int]func(net.Conn, string))
-	ph.HandlerFunc[ESignIn] = GetContentManager().SignIn
-	ph.HandlerFunc[EMessage] = GetContentManager().Message
+	ph.HandlerFunc = make(map[string]func(net.Conn, string))
+	ph.HandlerFunc["EnterGame"] = mm.EnterGame
+	ph.HandlerFunc["MatchingStart"] = mm.MatchingStart
 }

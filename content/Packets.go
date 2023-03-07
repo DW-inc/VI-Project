@@ -3,7 +3,8 @@ package content
 import (
 	"encoding/binary"
 	"encoding/json"
-	"log"
+
+	"github.com/DW-inc/Ludo_Server/utils"
 )
 
 func JsonStrToStruct[T any](jsonstr string) T {
@@ -15,7 +16,7 @@ func JsonStrToStruct[T any](jsonstr string) T {
 func MakeSendBuffer[T any](pktid uint16, data T) []byte {
 	sendData, err := json.Marshal(&data)
 	if err != nil {
-		log.Println("MakeSendBuffer : Marshal Error", err)
+		utils.Print("MakeSendBuffer : Marshal Error", err)
 	}
 	sendBuffer := make([]byte, 4)
 
@@ -29,15 +30,24 @@ func MakeSendBuffer[T any](pktid uint16, data T) []byte {
 	return sendBuffer
 }
 
-type S_SignIn struct {
+type S_EnterGame struct {
 	Id string
 }
 
-type S_Message struct {
-	Message string
+type R_EnterGame struct {
+	Money int
+	Body  int
 }
 
-type R_Message struct {
-	Id      string
-	Message string
+type S_MatchingStart struct {
+	Id string
+}
+
+type R_GameStart struct {
+	GameTime int
+}
+
+type R_OtherPlayer struct {
+	Body       []int
+	SpawnPoint []int
 }

@@ -1,46 +1,33 @@
 package content
 
 import (
-	"log"
 	"net"
-	"sync"
+
+	"github.com/DW-inc/Ludo_Server/utils"
 )
 
-type GlobalSession struct {
+type SessionManager struct {
 }
 
-var instance_gs *GlobalSession
-var once_gs sync.Once
-
-func GetGlobalSession() *GlobalSession {
-	once_gs.Do(func() {
-		instance_gs = &GlobalSession{}
-	})
-	return instance_gs
-}
-
-func (gs *GlobalSession) Init() {
-	log.Println("INIT_GlobalSession")
+func (sm *SessionManager) Init() {
+	utils.Print("INIT_GlobalSession")
 
 }
 
-func (gs *GlobalSession) SendByte(c net.Conn, data []byte) {
+func (sm *SessionManager) SendByte(c net.Conn, data []byte) {
 	if c != nil {
 		sent, err := c.Write(data)
 		if err != nil {
-			log.Println("SendPacket ERROR :", err)
+			utils.Print("SendPacket ERROR :", err)
 		} else {
 			if sent != len(data) {
-				log.Println("[Sent diffrent size] : SENT =", sent, "BufferSize =", len(data))
+				utils.Print("[Sent diffrent size] : SENT =", sent, "BufferSize =", len(data))
 			}
-			log.Println("SendPacket : ", data)
+			utils.Print("SendPacket : ", data)
 		}
 	}
 }
 
-func (gs *GlobalSession) BroadCast(buff []byte) {
-	GetContentManager().Players.Range(func(key, value any) bool {
-		gs.SendByte(key.(net.Conn), value.([]byte))
-		return true
-	})
+func (sm *SessionManager) BroadCast(buff []byte) {
+
 }
