@@ -1,27 +1,27 @@
 package content
 
 import (
-	"github.com/DW-inc/Ludo_Server/utils"
+	"github.com/DW-inc/VI-Project/utils"
 )
 
 var (
 	ph  *PacketHandler
 	sm  *SessionManager
 	dbm *DBManager
-	mm  *MatchManager
+	lm  *LoginManager
 )
 
 func ContentManagerInit() {
 	utils.Print("INIT_ContentManager")
-	ph = &PacketHandler{}
-	sm = &SessionManager{}
 	dbm = &DBManager{}
-	mm = &MatchManager{}
+	sm = &SessionManager{}
+	lm = &LoginManager{}
+	ph = &PacketHandler{}
 
-	ph.Init()
-	sm.Init()
 	dbm.Init()
-	mm.Init()
+	sm.Init()
+	lm.Init()
+	ph.Init()
 }
 
 func GetPacketHandler() *PacketHandler {

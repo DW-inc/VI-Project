@@ -1,10 +1,16 @@
 package content
 
-import "net"
+import (
+	"net"
+)
 
 type Player struct {
-	Id    string
-	Money int
-	Body  int
-	Conn  net.Conn
+	EMail    string
+	Id       string
+	password string
+	Conn     net.Conn
+}
+
+func (p *Player) Store() {
+
 }

@@ -3,12 +3,12 @@ package network
 import (
 	"errors"
 	"io"
+	"log"
 	"net"
 	"syscall"
-	"time"
 
-	"github.com/DW-inc/Ludo_Server/content"
-	"github.com/DW-inc/Ludo_Server/utils"
+	"github.com/DW-inc/VI-Project/content"
+	"github.com/DW-inc/VI-Project/utils"
 )
 
 type Server struct {
@@ -50,6 +50,7 @@ func (s *Server) EventLoop(conn net.Conn) {
 		if err != nil {
 			if errors.Is(err, io.EOF) || errors.Is(err, syscall.Errno(10054)) {
 				// content.GetGlobalSession().Disconnect(conn)
+				log.Println("Client DIscoonect", conn.RemoteAddr().String())
 				conn.Close()
 			}
 			return
@@ -86,8 +87,4 @@ func (s *Server) EventLoop(conn net.Conn) {
 }
 
 func (s *Server) Test(conn net.Conn) {
-	time.Sleep(time.Second * 5)
-	packet := content.S_EnterGame{Id: "TESTER"}
-	buffer := utils.MakeSendBuffer("EnterGame", packet)
-	content.GetGlobalSession().SendByte(conn, buffer)
 }

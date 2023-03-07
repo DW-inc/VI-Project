@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
-	"github.com/DW-inc/Ludo_Server/content"
-	"github.com/DW-inc/Ludo_Server/network"
-	"github.com/DW-inc/Ludo_Server/utils"
+	"github.com/DW-inc/VI-Project/content"
+	"github.com/DW-inc/VI-Project/network"
+	"github.com/DW-inc/VI-Project/utils"
 )
 
 func main() {

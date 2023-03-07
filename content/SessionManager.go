@@ -3,7 +3,7 @@ package content
 import (
 	"net"
 
-	"github.com/DW-inc/Ludo_Server/utils"
+	"github.com/DW-inc/VI-Project/utils"
 )
 
 type SessionManager struct {
