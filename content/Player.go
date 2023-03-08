@@ -5,12 +5,12 @@ import (
 )
 
 type Player struct {
-	EMail    string
 	Id       string
 	password string
+	EMail    string
 	Conn     net.Conn
 }
 
-func (p *Player) Store() {
+func (p *Player) Store(data Player) {
 
 }

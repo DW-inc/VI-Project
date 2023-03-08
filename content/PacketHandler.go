@@ -19,6 +19,7 @@ func (ph *PacketHandler) Init() {
 	ph.HandlerFunc["SignUp"] = lm.SignUp
 	ph.HandlerFunc["Login"] = lm.Login
 	ph.HandlerFunc["AutoLogin"] = lm.AutoLogin
+	ph.HandlerFunc["NickName"] = lm.NickName
 
 	ph.Test()
 }

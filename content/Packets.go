@@ -77,3 +77,11 @@ type R_Login struct { // Autologin + Login 결과 값
 	IsLogin     bool
 	HasNickName bool
 }
+
+type S_NickName struct {
+	NickName string
+}
+
+type R_NickName struct {
+	IsPossibleNickName bool
+}
